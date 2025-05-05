@@ -1,0 +1,60 @@
+<odoo>
+    <!-- Vista de formulario para Debug Tool -->
+    <record id="view_debug_tool_form" model="ir.ui.view">
+        <field name="name">debug.tool.form</field>
+        <field name="model">debug.tool</field>
+        <field name="groups_id" eval="[(4, ref('base.group_no_one'))]"/> <!-- Solo visible en modo desarrollador -->
+        <field name="arch" type="xml">
+            <form string="Herramienta de Depuración">
+                <sheet>
+                    <group>
+                        <field name="model_name"/>
+                        <field name="record_id"/>
+                        <field name="field_name"/>
+                        <field name="function_name"/>
+                        <field name="output" readonly="1"/>
+                    </group>
+                    <footer>
+                        <button name="execute_debug" type="object" string="Ejecutar" class="oe_highlight"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vista de lista para Debug Tool -->
+    <record id="view_debug_tool_tree" model="ir.ui.view">
+        <field name="name">debug.tool.tree</field>
+        <field name="model">debug.tool</field>
+        <field name="groups_id" eval="[(4, ref('base.group_no_one'))]"/> <!-- Solo visible en modo desarrollador -->
+        <field name="arch" type="xml">
+            <tree string="Herramienta de Depuración">
+                <field name="model_name"/>
+                <field name="record_id"/>
+                <field name="field_name"/>
+                <field name="function_name"/>
+                <field name="output"/>
+                <button name="execute_debug" type="object"
+                         string="Ejecutar Debug"
+                         title="Hace debug de función"
+                         class="oe_stat_button mt-2"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Acción para abrir Debug Tool -->
+    <record id="action_debug_tool" model="ir.actions.act_window">
+        <field name="name">Herramienta de Depuración</field>
+        <field name="res_model">debug.tool</field>
+        <field name="view_mode">tree,form</field>
+        <field name="groups_id" eval="[(4, ref('base.group_no_one'))]"/> <!-- Solo visible en modo desarrollador -->
+    </record>
+
+    <!-- Menú para Debug Tool en Ajustes -->
+    <menuitem id="menu_debug_tool_settings"
+              name="Debug Tool"
+              parent="base.menu_config"
+              sequence="10"
+              action="action_debug_tool"
+              groups="base.group_no_one"/> <!-- Solo visible en modo desarrollador -->
+</odoo>
