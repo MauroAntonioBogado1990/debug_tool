@@ -14,9 +14,9 @@
                         <field name="function_name"/>
                         <field name="output" readonly="1"/>
                     </group>
-                    <footer>
+                
                         <button name="execute_debug" type="object" string="Ejecutar" class="oe_highlight"/>
-                    </footer>
+                   
                 </sheet>
             </form>
         </field>
