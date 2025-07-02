@@ -109,3 +109,32 @@ class ToolDebug(models.Model):
             _logger.error("Error obteniendo valor relacional: %s", e)
             trace_log.append(f"Error accediendo a '{field_path}': {str(e)}")
             return f"Error accediendo a '{field_path}': {str(e)}"
+        
+
+
+########
+#alternativa de rollback
+# @api.model
+# def simulate_workflow(self):
+#     self = self.with_context(no_commit=True)
+#     try:
+#         # Lógica que normalmente haría cambios reales
+#         simulated_record = self.create({
+#             'name': 'Simulado',
+#             'field_x': 'valor',
+#         })
+
+#         simulated_record.action_confirm()
+#         simulated_record.action_post()
+
+#         # Evaluación, logging, envío de valores a interfaz, etc.
+#         result = simulated_record.status
+
+#         # ¡Y luego revocás todo!
+#         self.env.cr.rollback()
+#         return result
+
+#     except Exception as e:
+#         self.env.cr.rollback()
+#         _logger.error(f"Error en simulación: {e}")
+#         raise
